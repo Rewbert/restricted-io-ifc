@@ -23,5 +23,5 @@ class UnsafeFileIO (m :: Type -> Type) where
     untrustedwriteFile :: FilePath -> String -> m ()
 
 class EntropyIO (m :: Type -> Type) where
-    data Entropy m :: Type
+    type Entropy m :: Type
     genEntropyPool :: m (Entropy m)
