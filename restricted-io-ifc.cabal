@@ -1,0 +1,34 @@
+cabal-version:      2.4
+name:               restricted-io-ifc
+version:            0.1.0.0
+
+-- A short (one-line) description of the package.
+-- synopsis: This package exposes an interface to a restricted IO monad
+-- that helps the user enforce certain IFC policies.
+
+-- A longer description of the package.
+-- description: very long description
+
+-- A URL where users can report bugs.
+-- bug-reports:
+
+-- The license under which the package is released.
+-- license:
+author:             Robert Krook
+maintainer:         krookr@chalmers.se
+
+-- A copyright notice.
+-- copyright:
+-- category:
+extra-source-files: CHANGELOG.md
+
+library
+  exposed-modules:
+      IFCIO
+  other-modules:
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+    , base
+  default-language: Haskell2010
