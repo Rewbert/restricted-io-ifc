@@ -20,7 +20,7 @@ class UnsafeFileIO (m :: Type -> Type) where
     untrustedReadFile  :: FilePath -> m (Untrusted String)
     -- | write to the untrusted part of the filesystem. This is identical to the
     -- conventional @readFile@ function
-    untrustedwriteFile :: FilePath -> String -> m ()
+    untrustedWriteFile :: FilePath -> String -> m ()
 
 class EntropyIO (m :: Type -> Type) where
     type Entropy m :: Type
