@@ -24,7 +24,9 @@ class UnsafeFileIO (m :: Type -> Type) where
 
 class EntropyIO (m :: Type -> Type) where
     type Entropy m
+    type RNG m
     genEntropyPool :: m (Entropy m)
+    getRNG :: Entropy m -> m (RNG m)
 
 -- class ReferenceIO (m :: Type -> Type) (c :: Type -> Type) where
 --     type Ref m 
