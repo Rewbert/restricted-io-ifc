@@ -12,7 +12,7 @@ import Data.Kind
 
 import Internal.Untrusted
 
-type RestrictedIO m = (UnsafeFileIO m, EntropyIO m)
+type RestrictedIO m entropy = (UnsafeFileIO m, EntropyIO m entropy)
 
 class UnsafeFileIO (m :: Type -> Type) where
     -- | read a file from an untrusted part of the filesystem, yielding an untrusted
@@ -22,11 +22,8 @@ class UnsafeFileIO (m :: Type -> Type) where
     -- conventional @readFile@ function
     untrustedWriteFile :: FilePath -> String -> m ()
 
-class EntropyIO (m :: Type -> Type) where
-    type Entropy m
-    type RNG m
-    genEntropyPool :: m (Entropy m)
-    getRNG :: Entropy m -> m (RNG m)
+class EntropyIO (m :: Type -> Type) (entropy :: Type) where
+    genEntropyPool :: m entropy
 
 -- class ReferenceIO (m :: Type -> Type) (c :: Type -> Type) where
 --     type Ref m 
