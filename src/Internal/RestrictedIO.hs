@@ -12,7 +12,7 @@ import Data.Kind
 
 import Internal.Untrusted
 
-type RestrictedIO m entropy = (UnsafeFileIO m, EntropyIO m entropy)
+type RestrictedIO m entropy = (UnsafeFileIO m, EntropyIO m entropy, RandomIO m)
 
 class UnsafeFileIO (m :: Type -> Type) where
     -- | read a file from an untrusted part of the filesystem, yielding an untrusted
@@ -25,6 +25,10 @@ class UnsafeFileIO (m :: Type -> Type) where
 class EntropyIO (m :: Type -> Type) (entropy :: Type) where
     genEntropyPool :: m entropy
 
--- class ReferenceIO (m :: Type -> Type) (c :: Type -> Type) where
---     type Ref m 
---     newRemoteRef :: a -> c (m (Ref a))
+-- | Generate random numbers. Important that the random number is samples only using
+-- things inside of the enclave
+class RandomIO (m :: Type -> Type) where
+    type Gen m
+    newGen :: m (Gen m)
+    splitGen :: Gen m -> m (Gen m, Gen m)
+    uniFromGen :: (Int, Int) -> Gen m -> m (Int, Gen m)
