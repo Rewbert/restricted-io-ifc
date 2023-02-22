@@ -6,6 +6,7 @@ module Internal.RestrictedIO (
     RestrictedIO
     , UnsafeFileIO(..)
     , EntropyIO(..)
+    , RandomIO(..)
 ) where
 
 import Data.Kind
